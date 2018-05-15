@@ -16,41 +16,45 @@
   <div class = "jumbotron text-center">
     <h1>Mars News and Data</h1>
     <br>
-    <button type="button" class="btn btn-primary"><a href = "/scrape">Scrape New Data</a></button>
+    <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
   </div> <!--Jumbotron-->
 
   <div class="row">
     <div class="col-md-12" align="left">
-      <h1>Latest Mars News</h1>
-      <p>{{variable}}</p>
+      <h2>Latest Mars News</h2>
+      <h3>{{ news_data.header }}</h3>
+      <p>{{ news_data.paragraph }}</p> 
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12" align="left">
-      <h1>Featured Mars Image</h1>
-      <p>{{variable}}</p>
+      <h2>Featured Mars Image</h2>
+      <img src = {{ featured_data.img_url }}>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12" align="left">
-      <h1>Current Weather on Mars</h1>
-      <p>{{variable}}</p>
+      <h2>Current Weather on Mars</h2>
+      <p>{{ weather_data.paragraph }}</p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12" align="left">
-      <h1>Facts About Mars</h1>
+      <h2>Facts About Mars</h2>
       <p>{{variable}}</p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12" align="Center">
-      <h1>Mars' Hemispheres</h1>
-      <p>{{variable}}</p>
+      <h2>Mars' Hemispheres</h2>
+      <img src = {{ hemi1_data.img_url }}>
+      <img src = {{ hemi2_data.img_url }}>
+      <img src = {{ hemi3_data.img_url }}>
+      <img src = {{ hemi4_data.img_url }}>
     </div>
   </div>
 

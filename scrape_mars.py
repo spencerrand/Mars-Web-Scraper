@@ -37,10 +37,10 @@ def scrape():
 
     # Get the header and paragraph text from the first news item
     news_paragraph = results[0].find('div', class_='article_teaser_body').text
-    news_title = results[0].find('h3').text
+    news_header = results[0].find('h3').text
 
     # Add news title and news paragraph as a dictionary to list
-    data_list.append({'title':news_title, 'paragraph': news_paragraph})
+    data_list.append({'title' : 'Latest Mars News', 'header' : news_header, 'paragraph': news_paragraph})
 
     # Close and exit browser session
     browser.quit()
@@ -147,7 +147,7 @@ def scrape():
         # Save image
         urllib.request.urlretrieve(img_url, img_file_name)
         
-    print("Scrape_Mars.py: ", data_list)
+    print("Scrape complete: ", data_list)
     print()
 
     return (data_list)
