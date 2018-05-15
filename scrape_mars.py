@@ -5,6 +5,7 @@ from splinter import Browser
 import pandas as pd
 import urllib.request
 import time
+import json
 
 def scrape():
 
@@ -59,9 +60,12 @@ def scrape():
 
     # Get url for featured image
     featured_image_url = 'https://www.jpl.nasa.gov'+results[0]['data-fancybox-href']
+    
+    # Get header for featured image
+    featured_image_header = results[0]['data-title']
 
     # Add featured image as a dictionary to list
-    data_list.append({'title':"Featured Image", 'img_url': featured_image_url})
+    data_list.append({'title':"Featured Image", 'img_url': featured_image_url, 'header' : featured_image_header})
 
     # Save image
     urllib.request.urlretrieve(featured_image_url, 'featured-image.jpg')
@@ -147,8 +151,7 @@ def scrape():
         # Save image
         urllib.request.urlretrieve(img_url, img_file_name)
         
-    print("Scrape complete: ", data_list)
-    print()
+    print(json.dumps(data_list))
 
     return (data_list)
 
