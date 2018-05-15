@@ -1,18 +1,15 @@
-
-# coding: utf-8
-
-# In[25]:
-
-
 # Dependencies
 from bs4 import BeautifulSoup
 import requests
 from splinter import Browser
 import pandas as pd
 import urllib.request
-
+import time
 
 def scrape():
+
+    # Create an empty list to store scraped data
+    data_list = []
 
     # URL of page to be scraped
     mars_news_url = 'https://mars.nasa.gov/news/'
@@ -26,6 +23,9 @@ def scrape():
     # Go to url for news about mars
     browser.visit(mars_news_url)
 
+    # Sleep for 2 seconds
+    time.sleep(2)
+
     # Get HTML from browser
     html = browser.html
 
@@ -37,7 +37,10 @@ def scrape():
 
     # Get the header and paragraph text from the first news item
     news_paragraph = results[0].find('div', class_='article_teaser_body').text
-    news_header = results[0].find('h3').text
+    news_title = results[0].find('h3').text
+
+    # Add news title and news paragraph as a dictionary to list
+    data_list.append({'title':news_title, 'paragraph': news_paragraph})
 
     # Close and exit browser session
     browser.quit()
@@ -57,6 +60,9 @@ def scrape():
     # Get url for featured image
     featured_image_url = 'https://www.jpl.nasa.gov'+results[0]['data-fancybox-href']
 
+    # Add featured image as a dictionary to list
+    data_list.append({'title':"Featured Image", 'img_url': featured_image_url})
+
     # Save image
     urllib.request.urlretrieve(featured_image_url, 'featured-image.jpg')
 
@@ -75,6 +81,9 @@ def scrape():
     # Store first tweet
     mars_weather = results[0].find('p').text
 
+    # Add weather as a dictionary to list
+    data_list.append({'title':"Weather on Mars", 'paragraph': mars_weather})
+
     # url for Mars facts
     mars_facts_url = "https://space-facts.com/mars"
 
@@ -86,6 +95,9 @@ def scrape():
 
     # Remove \n from string
     mars_table_html = mars_table_html.replace('\n', '')
+
+    # Add table as a dictionary to list
+    data_list.append({'title':"Facts About Mars", 'table': mars_table_html})
 
     # url to search for Mars hemisphere images
     mars_hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -99,24 +111,15 @@ def scrape():
     # Retrieve parent item that has the search results
     results = soup.find_all('div', class_='item')
 
-    # Create empty list to store image titles and urls
-    hemispheres_image_urls = []
-
     # Loop through the search results
     for result in results:
 
-        # Create an empty dictionary to store image title and url
-        img_dict = {}
-
         # Find the text from the h3 tag
-        title = result.find('h3').text
+        img_title = result.find('h3').text
 
         # Strip out unwanted words
-        title = title.replace(' Enhanced', '')
+        img_title = img_title.replace(' Enhanced', '')
 
-        # Add title to dictionary
-        img_dict['title'] = title
-    
         # Find the link to the image
         link = result.find('a')['href']
 
@@ -128,25 +131,24 @@ def scrape():
 
         # Convert to BeautifulSoup object and parse using lxml
         img_soup = BeautifulSoup(img_response.text, 'lxml')
-    
+
         # Find all div items that has the url information
         img_results = img_soup.find_all('div', class_='downloads')
 
         # Find url in first result
         img_url = img_results[0].find_all('a')[0]['href']
 
-        # Add url to dictionary
-        img_dict['img_url'] = img_url
-    
-        # Append dictionary to list
-        hemispheres_image_urls.append(img_dict)
+        # Add weather as a dictionary to list
+        data_list.append({'title':img_title, 'img_url': img_url})
 
         # Replace spaces with dashes and add JPG as file name extension
-        img_file_name = img_dict['title'].replace(' ','-')+'.jpg'
-    
-        # Save image
-        urllib.request.urlretrieve(img_dict['img_url'], img_file_name)
+        img_file_name = img_title.replace(' ','-')+'.jpg'
 
-    # Print out final list    
-    hemispheres_image_urls
+        # Save image
+        urllib.request.urlretrieve(img_url, img_file_name)
+        
+    print("Scrape_Mars.py: ", data_list)
+    print()
+
+    return (data_list)
 
