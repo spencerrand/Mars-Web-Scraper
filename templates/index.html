@@ -25,7 +25,7 @@
     </div>
       
     <div class="col-md-6" align="right">
-      <h2>Current Weather on Mars</h2>
+      <h2>Current Weather on Mars</h2>  
     </div>       
   </div>
     
@@ -39,24 +39,31 @@
       <p>{{ weather_data.paragraph }}</p>
     </div>
   </div>
-
-
-  <div class="row">
-    <div class="col-md-12" align="left">
+    
+  <hr>
+    
+  <div class="row" border = "2">
+    <div class="col-md-6" align="left">
       <h2>Featured Mars Image</h2>
-      <h3>{{ featured_data.header }}</h3>
     </div>
-    <div class="col-md-12" align="left">
-      <img src = {{ featured_data.img_url }} style = "width: 25%; height: 25%">
-    </div>
+      
+    <div class="col-md-6" align="right">
+      <h2>Facts About Mars</h2>
+    </div>       
   </div>
 
   <div class="row">
-    <div class="col-md-12" align="left">
-      <h2>Facts About Mars</h2>
+    <div class="col-md-6" align="left">
+      <img src = {{ featured_data.img_url }} style = "width: 75%; height: 75%">
+      <p>{{ featured_data.header }}</p>
+    </div>
+      
+    <div class="col-md-6" align="right">
       <p>{{ facts_data.table | safe }}</p>
     </div>
   </div>
+    
+  <hr>
 
   <div class="row">
     <div class="col-md-12" align="Center">

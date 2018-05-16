@@ -93,9 +93,18 @@ def scrape():
 
     # Read table from url using pandas
     tables = pd.read_html(mars_facts_url)
+    
+    # Set index as first column
+    df = tables[0].set_index(0)
+    
+    # Remove index name
+    del(df.index.name)
+    
+    # Hide column heading
+    df.rename(columns={1:''}, inplace=True)
 
-    # Convert table to HTML
-    mars_table_html = tables[0].to_html()
+    # Convert dataframe to HTML
+    mars_table_html = df.to_html()
 
     # Remove \n from string
     mars_table_html = mars_table_html.replace('\n', '')
@@ -151,7 +160,10 @@ def scrape():
         # Save image
         urllib.request.urlretrieve(img_url, img_file_name)
         
-    print(json.dumps(data_list))
+    for item in data_list:
+        for key, value in item.items():
+            print(key, ': ', value)
+            print()
 
     return (data_list)
 
