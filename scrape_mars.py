@@ -12,6 +12,7 @@ def scrape():
     # Create an empty list to store scraped data
     data_list = []
 
+    ######  LATEST MARS NEWS  ######    
     # URL of page to be scraped
     mars_news_url = 'https://mars.nasa.gov/news/'
 
@@ -46,6 +47,7 @@ def scrape():
     # Close and exit browser session
     browser.quit()
 
+    ######  FEATURED IMAGE OF MARS  ######
     # URL for featured image of Mars
     jpl_image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
 
@@ -70,6 +72,7 @@ def scrape():
     # Save image
     urllib.request.urlretrieve(featured_image_url, 'featured-image.jpg')
 
+    ######  MARS WEATHER VIA TWITTER  ######
     # URL for Mars weather twitter account
     mars_twitter_url = 'https://twitter.com/marswxreport'
 
@@ -88,6 +91,7 @@ def scrape():
     # Add weather as a dictionary to list
     data_list.append({'title':"Weather on Mars", 'paragraph': mars_weather})
 
+    ######  FACTS ABOUT MARS  ######
     # url for Mars facts
     mars_facts_url = "https://space-facts.com/mars"
 
@@ -112,6 +116,7 @@ def scrape():
     # Add table as a dictionary to list
     data_list.append({'title':"Facts About Mars", 'table': mars_table_html})
 
+    ######  IMAGES OF MARS HEMISPHERES  ######
     # url to search for Mars hemisphere images
     mars_hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
 
@@ -160,10 +165,12 @@ def scrape():
         # Save image
         urllib.request.urlretrieve(img_url, img_file_name)
         
+    # Iterate through items scraped and print them to the console
     for item in data_list:
         for key, value in item.items():
             print(key, ': ', value)
             print()
 
+    # Return list of dictionaries
     return (data_list)
 
