@@ -3,65 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <title>Mission to Mars</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <!-- CSS -->
+  <style>
+    body, div, a, p, h1, h2, h3 {
+      color:white;
+    }
+  </style>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
 
-<div class="container">
-  
-  <!--Jumbotron-->
-  <div class = "jumbotron text-center">
+<body style="background-color:black">
+<br>
+<div class="container" style="background-color:maroon">
+  <br>
+  <!-- Jumbotron -->
+  <div class = "jumbotron text-center" style="background-color:black">
     <h1>Mars News and Data</h1>
     <br>
     <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
-  </div> <!--Jumbotron-->
+  </div> <!-- Jumbotron -->
 
-  <div class="row" border = "2">
-    <div class="col-md-6" align="left">
+  <div class="row">
+    <div class="col-xs-3 col-md-6" align="left">
       <h2>Latest Mars News</h2>
     </div>
       
-    <div class="col-md-6" align="right">
+    <div class="col-xs-3 col-md-6" align="right">
       <h2>Current Weather on Mars</h2>  
     </div>       
-  </div>
+  </div> <!-- Row -->
     
   <div class="row">   
-    <div class="col-md-6" align="left">
+    <div class="col-xs-3 col-md-6" align="left">
       <p>{{ news_data.paragraph }}</p>
       <p>{{ news_data.header }}</p>
     </div>
       
-    <div class="col-md-6" align="right">
+    <div class="col-xs-3 col-md-6" align="right">
       <p>{{ weather_data.paragraph }}</p>
     </div>
-  </div>
+  </div> <!-- Row -->
     
   <hr>
     
   <div class="row" border = "2">
-    <div class="col-md-6" align="left">
+    <div class="col-xs-3 col-md-6" align="left">
       <h2>Featured Mars Image</h2>
     </div>
       
-    <div class="col-md-6" align="right">
+    <div class="col-xs-3 col-md-6" align="right">
       <h2>Facts About Mars</h2>
     </div>       
-  </div>
+  </div> <!-- Row -->
 
   <div class="row">
-    <div class="col-md-6" align="left">
+    <div class="col-xs-3 col-md-6" align="left">
       <img src = {{ featured_data.img_url }} style = "width: 75%; height: 75%">
       <p>{{ featured_data.header }}</p>
     </div>
       
-    <div class="col-md-6" align="right">
+    <div class="col-xs-3 col-md-6" align="right">
       <p>{{ facts_data.table | safe }}</p>
     </div>
-  </div>
+  </div> <!-- Row -->
     
   <hr>
 
@@ -77,7 +85,9 @@
       <h3>{{ hemi2_data.title }}</h3>
       <img src = {{ hemi2_data.img_url }} style = "width: 50%; height: 50%">
     </div>
-    <br>
+    
+    <div class="col-md-12"><p></p></div>
+
     <div class="col-md-6" align="Center">
       <h3>{{ hemi3_data.title }}</h3>
       <img src = {{ hemi3_data.img_url }} style = "width: 50%; height: 50%">
@@ -86,9 +96,9 @@
       <h3>{{ hemi4_data.title }}</h3>
       <img src = {{ hemi4_data.img_url }} style = "width: 50%; height: 50%">
     </div>
-  </div> 
-      
+  </div>  <!-- Row -->
+<br>    
 </div> <!--Container-->
-  
+<br>
 </body>
 </html>
