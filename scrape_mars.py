@@ -42,7 +42,7 @@ def scrape():
     news_header = results[0].find('h3').text
 
     # Add news title and news paragraph as a dictionary to list
-    data_list.append({'title' : 'Latest Mars News', 'header' : news_header, 'paragraph': news_paragraph})
+    data_list.append({'title' : 'Latest Mars News', 'header' : news_header, 'paragraph': news_paragraph, 'url' : mars_news_url})
 
     # Close and exit browser session
     browser.quit()
@@ -89,7 +89,7 @@ def scrape():
     mars_weather = results[0].find('p').text
 
     # Add weather as a dictionary to list
-    data_list.append({'title':"Weather on Mars", 'paragraph': mars_weather})
+    data_list.append({'title':"Weather on Mars", 'paragraph': mars_weather, 'url' : mars_twitter_url})
 
     ######  FACTS ABOUT MARS  ######
     # url for Mars facts
@@ -114,7 +114,7 @@ def scrape():
     mars_table_html = mars_table_html.replace('\n', '')
 
     # Add table as a dictionary to list
-    data_list.append({'title':"Facts About Mars", 'table': mars_table_html})
+    data_list.append({'title':"Facts About Mars", 'table': mars_table_html, 'url' : mars_facts_url})
 
     ######  IMAGES OF MARS HEMISPHERES  ######
     # url to search for Mars hemisphere images
