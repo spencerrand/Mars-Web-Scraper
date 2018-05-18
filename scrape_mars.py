@@ -36,6 +36,7 @@ def scrape():
 
     # Retrieve the parent item for all news items
     results = soup.find_all('li', class_='slide')
+    #print("Results: ", results[0])
 
     # Get the header and paragraph text from the first news item
     news_paragraph = results[0].find('div', class_='article_teaser_body').text
